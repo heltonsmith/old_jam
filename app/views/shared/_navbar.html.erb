@@ -4,10 +4,18 @@
     <%= link_to "Posts", posts_path %>
     <%= link_to "New post", new_post_path %>
   </nav>
-  <% if current_user %>
+  <% if user_signed_in? %>
     <p>
       Hello <strong><%= current_user.name %>!</strong>
       Eres administrador? <%= current_user.admin %>!</p>
+
+      <br>
+        <% if current_user.admin %>
+          <%= render "shared/cabeceraadmin" %>
+        <% else %>
+          <%= render "shared/cabeceranormal" %>
+        <% end %>  
+
     <p><%= link_to "Cerrar sesion", destroy_user_session_path, 'data-turbo-method': :delete %></p>
   <% else %>
     <p>
